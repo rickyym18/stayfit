@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <Meta charset="UTF-8">
+    <meta name="viewpoint" content=" width=device-width, initial-scale=1.0">
+    <title> index </title>
+    <link rel="stylesheet" href="style.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="wrapper">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li >{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="edit_page">
+        <form method="POST" action="/edit/{{workout.id}}" class="button_group">
+            {% csrf_token %}
+            <label for="workout" class="edit_header"> Workout </label><br>
+            <textarea name="workout" class="text"> {{workout.workout}} </textarea></br>
+            <button type="submit" class="button">Submit</button>
+        </form>
+        <a href="/home" class="link">Back</a>
+        <form method= "POST" action="/logout">
+            {% csrf_token %}
+            <button type="submit" class="button">Logout</button>
+        </form>
+    </div>
+</body>
+</html>
